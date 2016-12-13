@@ -1,0 +1,8 @@
+<h4>{{ question.title }}</h4>
+<p>{{ question.description }}</p>
+<div *ngIf="question.listAnswer">
+    <div *ngFor="let aAn of question.listAnswer;  let i = index">
+        <input name="group{{question.id}}" type="radio" id="answer{{question.id}}{{i}}" />
+        <label htmlFor="answer{{question.id}}{{i}}">{{ aAn.content }}</label>
+    </div>
+</div>

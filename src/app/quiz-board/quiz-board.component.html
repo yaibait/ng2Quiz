@@ -1,0 +1,33 @@
+<div class="nav-wrapper">
+  <div class="row">
+    <div class="col s12">
+      <nav>
+        <div class="nav-wrapper white black-text">
+
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+<div class="white black-text" id="question-area">
+  <div class="wrap-question">
+    <template [ngIf]="listQuesion">
+      <app-question [question]="currentQuestion"></app-question>
+    </template>
+    <div id="controller-area">
+      <div class="row">
+        <div class="col s6" id="btnBack-wrap">
+          <button *ngIf="showBack" (click)="backBtnEvent($event)" class="btn waves-effect waves-light">Back</button>
+          
+        </div>
+        <div class="col s6" id="btnNext-wrap">
+          <button *ngIf="showNext" (click)="nextBtnEvent($event)"  class="btn waves-effect waves-light">Next</button>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<sideNav></sideNav>
+        

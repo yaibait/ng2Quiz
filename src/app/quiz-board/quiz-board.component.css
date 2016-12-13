@@ -1,0 +1,17 @@
+#question-area{
+    padding: 30px 0px;
+}
+
+#controller-area{
+    padding-top: 10px;
+    text-align: center;
+}
+#btnBack-wrap{
+    text-align: right;
+}
+#btnNext-wrap{
+    text-align: left;
+}
+.wrap-question{
+    margin: 20px;
+}
