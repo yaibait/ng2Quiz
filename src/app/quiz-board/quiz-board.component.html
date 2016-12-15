@@ -1,33 +1,47 @@
-<div class="nav-wrapper">
-  <div class="row">
-    <div class="col s12">
-      <nav>
-        <div class="nav-wrapper white black-text">
+<md-sidenav-layout>
 
-        </div>
-      </nav>
-    </div>
-  </div>
-</div>
-<div class="white black-text" id="question-area">
+<div class="container">
+
+<md-toolbar color="primary">
+    <button md-button (click)="sidenav.toggle()">
+        <i class="fa fa-list-ul" aria-hidden="true"></i>
+    </button>
+</md-toolbar>
+
+<div id="question-area">
   <div class="wrap-question">
     <template [ngIf]="listQuesion">
-      <app-question [question]="currentQuestion"></app-question>
+      <app-question [setQuestion]="currentQuestion" (choiseAnswer)="getAnswerEvent($event)"></app-question>
     </template>
     <div id="controller-area">
       <div class="row">
-        <div class="col s6" id="btnBack-wrap">
-          <button *ngIf="showBack" (click)="backBtnEvent($event)" class="btn waves-effect waves-light">Back</button>
-          
+        <div class="col-md-6" id="btnBack-wrap">
+          <button md-raised-button color="primary" *ngIf="showBack" (click)="backBtnEvent($event)"  >Back</button>
         </div>
-        <div class="col s6" id="btnNext-wrap">
-          <button *ngIf="showNext" (click)="nextBtnEvent($event)"  class="btn waves-effect waves-light">Next</button>
-          
+        <div class="col-md-6" id="btnNext-wrap">
+          <button md-raised-button color="primary" *ngIf="showNext" (click)="nextBtnEvent($event)" >Next</button>
+        </div>
+        <div class="col-md-12" *ngIf="completeQuiz" id="submitBtnWrap">
+          <button md-raised-button color="accent" (click)="submitQuiz()">Submit</button>
         </div>
       </div>
     </div>
 
   </div>
 </div>
-<sideNav></sideNav>
-        
+</div><!-- end container -->
+    <md-sidenav #sidenav>
+      <h4>List Question</h4>
+
+      <md-list *ngIf="listQuesion">
+        <md-list-item *ngFor="let question of listQuesion" (click)="sliderbarClickEvent(question); sidenav.close()" >
+          {{question.title}}
+          
+          <i *ngIf="!question.isAnswer" class="fa fa-circle-o" aria-hidden="true"></i>
+          <i *ngIf="question.isAnswer" class="fa fa-check-circle-o" aria-hidden="true"></i>
+        </md-list-item>
+      </md-list>
+    </md-sidenav>
+
+</md-sidenav-layout>
+

@@ -6,10 +6,15 @@ export class QuestionService {
   listQuestionSample:Question[];
   constructor() { }
   getQuestionPackById(_id:string):Question[]{
+      var tempReturn:Question[] = testQuestion.slice(0) as Question[];
+      tempReturn.forEach(element => {
+        element['isAnswer']= false;
+        element.listAnswer.forEach(element => {
+            element.isCorrect = false;
+        });
+      });
 
-
-
-      return testQuestion;
+      return tempReturn;
   }
 }
 
@@ -22,17 +27,17 @@ const testQuestion = [
       {
         "id": 1,
         "content": "Answer 1",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 2,
         "content": "Answer 2",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 3,
         "content": "Answer 3",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 4,
@@ -49,7 +54,7 @@ const testQuestion = [
       {
         "id": 1,
         "content": "Answer 1",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 2,
@@ -59,12 +64,12 @@ const testQuestion = [
       {
         "id": 3,
         "content": "Answer 3",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 4,
         "content": "Answer 4",
-        "isCorrect": true
+        "isCorrect": false
       }
     ]
   },
@@ -76,12 +81,12 @@ const testQuestion = [
       {
         "id": 1,
         "content": "Answer 1",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 2,
         "content": "Answer 2",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 3,
@@ -91,7 +96,7 @@ const testQuestion = [
       {
         "id": 4,
         "content": "Answer 4",
-        "isCorrect": true
+        "isCorrect": false
       }
     ]
   },
@@ -103,17 +108,17 @@ const testQuestion = [
       {
         "id": 1,
         "content": "Answer 1",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 2,
         "content": "Answer 2",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 3,
         "content": "Answer 3",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": 4,

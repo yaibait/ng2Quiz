@@ -4,4 +4,5 @@ export class Question {
     title:string = "";
     description = "";
     listAnswer:Answer[] = [];
+    isAnswer:boolean = false;
 }

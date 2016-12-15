@@ -15,3 +15,26 @@
 .wrap-question{
     margin: 20px;
 }
+md-sidenav{
+    background-color: #fff;
+    min-width: 200px;
+}
+md-list-item{
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+md-list-item i.fa{
+    font-size: 30px;
+    padding-left: 25px;
+    
+}
+md-list-item i.fa.fa-circle-o{
+    color: #ccc;
+}
+md-list-item i.fa.fa-check-circle-o{
+    color: #3f51b5;
+}
+#submitBtnWrap{
+    text-align: center;
+    margin-top: 10px;
+}

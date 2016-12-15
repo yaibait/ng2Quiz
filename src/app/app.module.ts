@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { QuizBoardComponent } from './quiz-board/quiz-board.component';
 import { MaterializeModule } from 'angular2-materialize';
+import { MaterialModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { MaterializeModule } from 'angular2-materialize';
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterializeModule
+    MaterialModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
