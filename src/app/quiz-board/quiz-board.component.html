@@ -8,8 +8,8 @@
     </button>
 </md-toolbar>
 
-<div id="question-area">
-  <div class="wrap-question">
+<div id="question-area" class="row">
+  <div class="wrap-question col-md-12" >
     <template [ngIf]="listQuesion">
       <app-question [setQuestion]="currentQuestion" (choiseAnswer)="getAnswerEvent($event)"></app-question>
     </template>
@@ -21,7 +21,7 @@
         <div class="col-md-6" id="btnNext-wrap">
           <button md-raised-button color="primary" *ngIf="showNext" (click)="nextBtnEvent($event)" >Next</button>
         </div>
-        <div class="col-md-12" *ngIf="completeQuiz" id="submitBtnWrap">
+        <div class="col-md-12 submitBtnWrap" *ngIf="completeQuiz" >
           <button md-raised-button color="accent" (click)="submitQuiz()">Submit</button>
         </div>
       </div>
@@ -35,12 +35,15 @@
 
       <md-list *ngIf="listQuesion">
         <md-list-item *ngFor="let question of listQuesion" (click)="sliderbarClickEvent(question); sidenav.close()" >
-          {{question.title}}
-          
+          <span class="listQuesion-title">{{question.title}}</span>
           <i *ngIf="!question.isAnswer" class="fa fa-circle-o" aria-hidden="true"></i>
           <i *ngIf="question.isAnswer" class="fa fa-check-circle-o" aria-hidden="true"></i>
         </md-list-item>
       </md-list>
+
+      <div *ngIf="completeQuiz" class="submitBtnWrap">
+          <button md-raised-button color="accent" (click)="submitQuiz()">Submit</button>
+        </div>
     </md-sidenav>
 
 </md-sidenav-layout>

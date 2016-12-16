@@ -7,7 +7,8 @@ export class QuestionService {
   constructor() { }
   getQuestionPackById(_id:string):Question[]{
       var tempReturn:Question[] = testQuestion.slice(0) as Question[];
-      tempReturn.forEach(element => {
+      tempReturn.forEach((element,index) => {
+      element['title'] = "Question " + (index+1);
         element['isAnswer']= false;
         element.listAnswer.forEach(element => {
             element.isCorrect = false;
@@ -21,7 +22,6 @@ export class QuestionService {
 const testQuestion = [
   {
     "id": 1,
-    "title": "Question 1",
     "description": "Question 1 description",
     "listAnswer": [
       {
@@ -48,7 +48,6 @@ const testQuestion = [
   },
   {
     "id": 2,
-    "title": "Question 2",
     "description": "Question 2 description",
     "listAnswer": [
       {
@@ -75,7 +74,6 @@ const testQuestion = [
   },
   {
     "id": 3,
-    "title": "Question 3",
     "description": "Question 3 description",
     "listAnswer": [
       {
@@ -102,7 +100,6 @@ const testQuestion = [
   },
   {
     "id": 4,
-    "title": "Question 4",
     "description": "Question 4 description",
     "listAnswer": [
       {

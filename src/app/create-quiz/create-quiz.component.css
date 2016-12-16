@@ -1,0 +1,7 @@
+.question-area{
+    border-bottom: 1px solid #ccc;
+}
+.remove-answer{
+    color: red;
+    font-size: 22px;
+}
