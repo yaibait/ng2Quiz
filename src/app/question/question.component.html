@@ -1,9 +1,9 @@
 <h4>{{ question.title }}</h4>
-<p>{{ question.description }}</p>
+<p [innerHTML]="question.description"></p>
 <div *ngIf="question.listAnswer">
         <md-radio-group [(ngModel)]="tempAnswerChoise" (change)="choiseAnswerEvent(tempAnswerChoise)">
             <md-radio-button *ngFor="let aAn of question.listAnswer" name="group{{question.id}}" [name]="aAn.id"  [value]="aAn" >
-                <p>{{ aAn.content }}</p>
+                <p class="answer-content" [innerHTML]="aAn.content"></p>
             </md-radio-button>
         </md-radio-group>
 </div>

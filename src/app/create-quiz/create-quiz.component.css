@@ -1,6 +1,11 @@
 .question-area{
     border-bottom: 1px solid #ccc;
 }
+.answer-area ul{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
 .remove-answer{
     color: red;
     font-size: 22px;

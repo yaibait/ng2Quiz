@@ -10,12 +10,14 @@ import { MaterializeModule } from 'angular2-materialize';
 import { MaterialModule } from '@angular/material';
 import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 import {CKEditorModule} from 'ng2-ckeditor';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
     QuestionComponent,
     QuizBoardComponent,
-    CreateQuizComponent
+    CreateQuizComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

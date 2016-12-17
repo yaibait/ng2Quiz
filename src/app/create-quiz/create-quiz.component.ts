@@ -11,6 +11,7 @@ export class CreateQuizComponent implements OnInit,AfterViewInit {
   listQuestion:Question[] = [];
   currentQues:Question;
   lastTabIndex:number = 1;
+  data:string = "";
   constructor() { 
     this.currentQues = new Question();
     this.listQuestion.push(this.currentQues);
@@ -27,7 +28,12 @@ export class CreateQuizComponent implements OnInit,AfterViewInit {
     this.lastTabIndex++;
   }
   removeQuestionEvent(){
-    console.log("dfdfd");
+    if(this.listQuestion.length > 1){
+      debugger;
+      var index = this.listQuestion.indexOf(this.currentQues) as number;
+      this.listQuestion.splice(index,1);
+      this.currentQues = this.listQuestion[this.listQuestion.length - 1];
+     }
   }
   addAnswerEvent(_question:Question){
     _question.listAnswer.push(new Answer());
@@ -35,7 +41,6 @@ export class CreateQuizComponent implements OnInit,AfterViewInit {
   }
   changeTabEvent(event){
     this.currentQues = this.listQuestion[event.index];
-    
   }
   removeAAnswer(_question:Question,_answer:Answer){
      var index = _question.listAnswer.indexOf(_answer) as number;
@@ -43,4 +48,8 @@ export class CreateQuizComponent implements OnInit,AfterViewInit {
     
   }
   
+  saveQuestionEvent(){
+    console.log(this.listQuestion);
+    this.data = JSON.stringify(this.listQuestion);
+  }
 }

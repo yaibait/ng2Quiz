@@ -4,7 +4,7 @@ export class Answer {
     isCorrect:boolean= false;
 
     
-    constructor(_id?:number,_content?:string,_isCorrect?:boolean){
+    constructor(_id?:number,_content?:string,_isCorrect:boolean = false){
         this.id = _id;
         this.content = _content;
         this.isCorrect = _isCorrect;
