@@ -9,6 +9,9 @@
         <md-icon class="md-24">add</md-icon>
       </button>
       <textarea id="" cols="30" rows="10">{{data}}</textarea> 
+      <div md-input-container>
+        <input [(ngModel)]="quiz.title" md-input placeholder="Title">
+      </div>
       <div *ngIf="listQuestion">
         <md-tab-group [selectedIndex]="lastTabIndex" (focusChange)="changeTabEvent($event)" >
         <div *ngFor="let aQues of listQuestion; let index = index;" class="question-area row">

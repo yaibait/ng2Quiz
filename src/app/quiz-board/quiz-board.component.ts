@@ -6,6 +6,7 @@ import { QuestionComponent } from '../question/question.component';
 // import * as $ from 'JQuery';
 // import { Ng2MaterialModule } from 'ng2-material';
 import { Answer } from '../answer';
+import { Utils } from '../utils';
 @Component({
   selector: 'app-quiz-board',
   templateUrl: './quiz-board.component.html',
@@ -22,9 +23,9 @@ export class QuizBoardComponent implements OnInit {
   completeQuiz:boolean = false;
   constructor(private questionService:QuestionService) {
       // $(".button-collapse").sideNav();
-    
+
       this.listQuesion = questionService.getQuestionPackById("1");
-      console.log(this.listQuesion);
+
       this.currentQuestion = this.listQuesion[this.currentIndex];
       if(this.listQuesion.length == 1){
         this.showNext = false;
@@ -89,8 +90,9 @@ export class QuizBoardComponent implements OnInit {
       
       this.completeQuiz = true;
   }
-
+  
   submitQuiz(){
+    this.questionService.getResultQuiz("1",this.listQuesion);
     console.log("submitQuiz");
   }
 }

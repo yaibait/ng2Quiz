@@ -11,6 +11,17 @@ import { MaterialModule } from '@angular/material';
 import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 import {CKEditorModule} from 'ng2-ckeditor';
 import { HomeComponent } from './home/home.component';
+
+import { AngularFireModule } from 'angularfire2';
+
+export const firebaseConfig = {
+    apiKey: "AIzaSyBn7QdIklo_nL47XggrSUVDYTiZ8fOOMJU",
+    authDomain: "register-d729b.firebaseapp.com",
+    databaseURL: "https://register-d729b.firebaseio.com",
+    storageBucket: "register-d729b.appspot.com",
+    messagingSenderId: "678531705163"
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +35,8 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    CKEditorModule
+    CKEditorModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

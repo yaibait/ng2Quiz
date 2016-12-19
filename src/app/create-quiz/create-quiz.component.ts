@@ -1,20 +1,31 @@
 import { Component, OnInit,AfterViewInit } from '@angular/core';
 import { Question } from '../question';
 import { Answer } from '../answer';
+import { Quiz } from '../quiz';
+import { QuestionService } from '../question.service';
 
 @Component({
   selector: 'app-create-quiz',
   templateUrl: './create-quiz.component.html',
-  styleUrls: ['./create-quiz.component.css']
+  styleUrls: ['./create-quiz.component.css'],
+  providers: [QuestionService]
 })
 export class CreateQuizComponent implements OnInit,AfterViewInit {
   listQuestion:Question[] = [];
   currentQues:Question;
   lastTabIndex:number = 1;
   data:string = "";
-  constructor() { 
-    this.currentQues = new Question();
+  currentQuesId:number = 1;
+  currentAnsId:number = 1;
+  quiz:Quiz;
+  constructor(private questionService:QuestionService) { 
+    var startQuestion = new Question();
+    startQuestion.id = this.currentQuesId;
+    this.currentQues = startQuestion;
+    
     this.listQuestion.push(this.currentQues);
+    this.quiz = new Quiz();
+    this.quiz.questionList = this.listQuestion;
   }
 
   ngOnInit() {
@@ -23,20 +34,23 @@ export class CreateQuizComponent implements OnInit,AfterViewInit {
     
   }
   addQuestionEvent(){
-    this.currentQues = new Question();
+    var aQues = new Question();
+    aQues.id = this.currentQuesId++;
+    this.currentAnsId = 1;
+    this.currentQues = aQues;
     this.listQuestion.push(this.currentQues);
     this.lastTabIndex++;
   }
   removeQuestionEvent(){
     if(this.listQuestion.length > 1){
-      debugger;
       var index = this.listQuestion.indexOf(this.currentQues) as number;
       this.listQuestion.splice(index,1);
       this.currentQues = this.listQuestion[this.listQuestion.length - 1];
      }
   }
   addAnswerEvent(_question:Question){
-    _question.listAnswer.push(new Answer());
+    var id = this.currentAnsId++; 
+    _question.listAnswer.push(new Answer(id));
     
   }
   changeTabEvent(event){
@@ -49,7 +63,13 @@ export class CreateQuizComponent implements OnInit,AfterViewInit {
   }
   
   saveQuestionEvent(){
-    console.log(this.listQuestion);
-    this.data = JSON.stringify(this.listQuestion);
+    // console.log(this.listQuestion);
+    this.data = JSON.stringify(this.quiz);
+    this.questionService.saveQuizPack(this.quiz).then(() => {
+        console.log("success");
+    },
+    () => {
+      console.log("Fail");
+    })
   }
 }
