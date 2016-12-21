@@ -10,55 +10,79 @@ export class QuestionService {
   constructor(private af:AngularFire) {
 
    }
-  getQuestionPackById(_id:string):Question[]{
-      var tempReturn:Question[] = quesTest2.slice(0) as Question[];
+  getQuestionPackById(_id:string,callback:(data) => void){
+
+      console.log(_id);
+      // var tempReturn:Question[] = JSON.parse(JSON.stringify(quesTest2));
       // suffle question
-      Utils.shuffleArray(tempReturn);
 
-      tempReturn.forEach((element,index) => {
-      element['title'] = "Question " + (index+1);
-        element['isAnswer']= false;
-        // suffle answer
-        Utils.shuffleArray(element.listAnswer);
-        element.listAnswer.forEach(element => {
-            element.isCorrect = false;
-        });
+      // Utils.shuffleArray(tempReturn);
+
+      // tempReturn.forEach((element,index) => {
+      // element['title'] = "Question " + (index+1);
+      //   element['isAnswer']= false;
+      //   // suffle answer
+      //   Utils.shuffleArray(element.listAnswer);
+      //   element.listAnswer.forEach(element => {
+      //       element.isCorrect = false;
+      //   });
+      // });
+
+      return this.af.database.object("/quizes/"+_id).subscribe((data) => {
+        let pack = data as Quiz;
+        Utils.shuffleArray(pack.questionList);
+        pack.questionList.forEach((element,index) => {
+          element['title'] = "Question " + (index+1);
+              element['isAnswer']= false;
+              // suffle answer
+              Utils.shuffleArray(element.listAnswer);
+              element.listAnswer.forEach(element => {
+              element.isCorrect = false;
+            });
+          });
+        callback(pack);
+
       });
-
-      return tempReturn;
   }
-  getResultQuiz(_packId:string,_userQuiz:Question[]):Question[]{
-    debugger;
-    var result = 0;
-    console.log(_userQuiz);
+  getQuizPackList(){
+    return this.af.database.list("/quizes");
+  }
+  getResultQuiz(_packId:string,_userQuiz:Question[],callback:(result) => void){
     
-    quesTest2.forEach(questBase => {
-      // find question
-      let notMatch = false;
-      let questionFind = _userQuiz.find((obj) => {
-         return obj.id == questBase.id;
-       });
+    return this.af.database.object("/quizes/"+_packId).subscribe((data) => {
+      var result = 0;
+      let pack = data as Quiz;
+      console.log(pack.questionList,_userQuiz);
+      pack.questionList.forEach(questBase => {
+          // find question
+          let match = false;
+          let userQuestion = _userQuiz.find((obj) => {
+            return obj.id == questBase.id;
+          });
 
-       // compare answer
-       for(var i = 0; i < questBase.listAnswer.length; i++ ){
-         var aAnswer = questBase.listAnswer[i];
-        //  var aAnswerUser =  questionFind.listAnswer.find((obj) => {
-        //    return obj.id == aAnswer.id;
-        //  });
-        //  if(aAnswer )
-          if(questionFind.listAnswer.indexOf(aAnswer) < 0){
-              notMatch = true;
-              break;
+          // compare answer
+          for(var i = 0; i < questBase.listAnswer.length; i++ ){
+            
+            let baseAnswer = questBase.listAnswer[i];
+
+              let userAnswer = userQuestion.listAnswer.find((obj) => {
+                  return obj.id == baseAnswer.id;
+              });
+              
+              if((userAnswer.isCorrect == baseAnswer.isCorrect) && (baseAnswer.isCorrect)){
+                  match = true;
+              }
+
           }
-       }
 
-      if(notMatch){
-          result++;
-      }
+          if(match){
+              result++;
+          }
 
-    });
-    console.log(result);
-    return null;
+        });
+        console.log(result);
+        });
+    
   }
 
   saveQuizPack(quizPack:Quiz):any{

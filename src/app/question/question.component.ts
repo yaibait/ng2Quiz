@@ -20,14 +20,12 @@ export class QuestionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
   }
   choiseAnswerEvent(obj:Answer){
     obj.isCorrect = true;
     this.question.isAnswer = true;
     this.question.listAnswer.forEach(element => {
-        if(element != obj){
-          console.log(element);
+        if(element.id != obj.id){
           element.isCorrect = false;
         }
     });

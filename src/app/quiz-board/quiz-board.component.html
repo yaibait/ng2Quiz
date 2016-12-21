@@ -35,7 +35,7 @@
 
       <md-list *ngIf="listQuesion">
         <md-list-item *ngFor="let question of listQuesion" (click)="sliderbarClickEvent(question); sidenav.close()" >
-          <span class="listQuesion-title">{{question.title}}</span>
+          <span class="listQuesion-title" >{{question.title}}</span>
           <i *ngIf="!question.isAnswer" class="fa fa-circle-o" aria-hidden="true"></i>
           <i *ngIf="question.isAnswer" class="fa fa-check-circle-o" aria-hidden="true"></i>
         </md-list-item>
