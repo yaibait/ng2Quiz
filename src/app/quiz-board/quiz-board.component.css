@@ -1,20 +1,41 @@
 #question-area{
     padding: 30px 0px;
 }
-
+#wrap-question{
+    width: 80%;
+    padding: 0px;
+}
+#wrap-question md-card-content{
+    padding: 30px;
+    min-height: 300px;
+}
+h4{
+    padding: 0px 5px;
+    
+}
+.listQuesionBtn{
+    background-color: #3f51b5;
+    border: none;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    margin-left: -16px;
+}
 #controller-area{
-    padding-top: 10px;
+    padding: 10px;
     text-align: center;
 }
-#btnBack-wrap{
+#controller-area .wrap-btn{
+    width: 100px;
+    display: inline-block;
+}
+/*#btnBack-wrap{
     text-align: right;
 }
 #btnNext-wrap{
     text-align: left;
-}
-.wrap-question{
-    margin: 20px;
-}
+}*/
+
 md-sidenav{
     background-color: #fff;
     min-width: 200px;
@@ -34,14 +55,24 @@ md-list-item i.fa.fa-circle-o{
 md-list-item i.fa.fa-check-circle-o{
     color: #3f51b5;
 }
-.submitBtnWrap{
-    text-align: center;
-    margin-top: 10px;
-}
-.md-radio-label{
+/*.submitBtnWrap{
+    position: absolute;
+    left: 50%;
+    margin-left: -44px;
+}*/
+/*.md-radio-label{
     white-space: normal;
-}
+}*/
 .listQuesion-title{
     overflow: hidden;
     text-overflow:ellipsis;
+}
+
+#question-area,md-sidenav-layout {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+md-sidenav-layout{
+    background: transparent;
 }

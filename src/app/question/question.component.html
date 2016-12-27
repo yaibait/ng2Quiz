@@ -3,7 +3,7 @@
 <div *ngIf="question.listAnswer">
         <md-radio-group [(ngModel)]="tempAnswerChoise" (change)="choiseAnswerEvent(tempAnswerChoise)">
             <md-radio-button *ngFor="let aAn of question.listAnswer" name="group{{question.id}}" [name]="aAn.id"  [value]="aAn" >
-                <p class="answer-content" [innerHTML]="aAn.content"></p>
+                <span class="answer-content" [innerHTML]="aAn.content"></span>
             </md-radio-button>
         </md-radio-group>
 </div>

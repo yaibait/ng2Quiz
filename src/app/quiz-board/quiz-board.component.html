@@ -1,35 +1,40 @@
 <md-sidenav-layout>
 
-<div class="container">
-
-<md-toolbar color="primary">
-    <button md-button (click)="sidenav.toggle()">
-        <i class="fa fa-list-ul" aria-hidden="true"></i>
-    </button>
-</md-toolbar>
-
-<div id="question-area" class="row">
-  <div class="wrap-question col-md-12" >
-    <template [ngIf]="listQuesion">
-      <app-question [setQuestion]="currentQuestion" (choiseAnswer)="getAnswerEvent($event)"></app-question>
-    </template>
-    <div id="controller-area">
-      <div class="row">
-        <div class="col-md-6" id="btnBack-wrap">
-          <button md-raised-button color="primary" *ngIf="showBack" (click)="backBtnEvent($event)"  >Back</button>
-        </div>
-        <div class="col-md-6" id="btnNext-wrap">
-          <button md-raised-button color="primary" *ngIf="showNext" (click)="nextBtnEvent($event)" >Next</button>
-        </div>
-        <div class="col-md-12 submitBtnWrap" *ngIf="completeQuiz" >
-          <button md-raised-button color="accent" (click)="submitQuiz()">Submit</button>
-        </div>
-      </div>
-    </div>
-
+  <div class="back-btn" (click)="backClickEvent()">
+      <md-icon class="md-24">arrow_back</md-icon>
   </div>
-</div>
-</div><!-- end container -->
+
+    <div id="question-area">
+      <md-card id="wrap-question" class="center-block">
+
+      <md-card-header>
+              <button class="listQuesionBtn" (click)="sidenav.toggle()">
+                <i class="fa fa-list-ul" aria-hidden="true"></i>
+              </button>
+      </md-card-header>
+      <md-card-content>
+            <template [ngIf]="listQuesion">
+              <app-question [setQuestion]="currentQuestion" (choiseAnswer)="getAnswerEvent($event)"></app-question>
+            </template>
+      </md-card-content>
+      <md-card-actions>
+        <div id="controller-area">
+              
+                <div class="wrap-btn" id="btnBack-wrap">
+                  <button md-raised-button [disabled]="!showBack" color="primary" (click)="backBtnEvent($event)">Back</button>
+                </div>
+                <div class="wrap-btn" id="btnNext-wrap">
+                  <button md-raised-button [disabled]="!showNext" color="primary" (click)="nextBtnEvent($event)" >Next</button>
+                </div>
+
+                  <div class="submitBtnWrap wrap-btn" *ngIf="completeQuiz" >
+                    <button md-raised-button color="accent" (click)="submitQuiz()">Submit</button>
+                  </div>
+
+            </div>
+      </md-card-actions>
+      </md-card>
+    </div>
     <md-sidenav #sidenav>
       <h4>List Question</h4>
 
@@ -47,4 +52,3 @@
     </md-sidenav>
 
 </md-sidenav-layout>
-

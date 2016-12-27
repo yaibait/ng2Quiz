@@ -1,0 +1,13 @@
+#login-wrap{
+    width: 60%;
+    margin-top: 100px;
+    height: 200px;
+    text-align: center;
+}
+#login-wrap md-card-title{
+    font-size: 30px;
+}
+#login-wrap button{
+    width: 100%;
+    margin-top: 15px;
+}

@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Location} from '@angular/common';
 import { Question } from '../question';
 import { QuestionService } from '../question.service';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Params, Router }   from '@angular/router';
 import { QuestionComponent } from '../question/question.component';
 import 'rxjs/add/operator/switchMap';
 import {Subscription} from 'rxjs';
-// import * as $ from 'JQuery';
-// import { Ng2MaterialModule } from 'ng2-material';
+
 import { Answer } from '../answer';
 import { Utils } from '../utils';
 import { Quiz } from '../quiz';
+import { SharedService } from '../shared.service';
+
 @Component({
   selector: 'app-quiz-board',
   templateUrl: './quiz-board.component.html',
@@ -18,6 +19,7 @@ import { Quiz } from '../quiz';
   providers: [QuestionService]
 })
 export class QuizBoardComponent implements OnInit {
+
   listQuesion:Question[];
   currentQuestion:Question;
   currentIndex = 0;
@@ -26,33 +28,30 @@ export class QuizBoardComponent implements OnInit {
   listAnswerTemp:Answer[];
   completeQuiz:boolean = false;
   quizPackId:string;
-  constructor(private questionService:QuestionService,private route:ActivatedRoute) {
-
-    //     this.route.params.switchMap( (params:Params) => this.questionService.getQuestionPackById(params['id'])).subscribe(data => {
-    //     // console.log(data);
-    //     let pack = data as Quiz;
-    //     console.log(pack);
-    //     this.listQuesion = pack.questionList as Question[];
-    //     // this.listQuesion = pack.questionList;
-        
-    //     this.currentQuestion = this.listQuesion[this.currentIndex];
-    //     if(this.listQuesion.length == 1){
-    //       this.showNext = false;
-    //     }
-    // },error => {
-    //     console.log(error);
-    // });
-
+  constructor(
+    private questionService:QuestionService,
+    private route:ActivatedRoute,
+    private router:Router,
+    private sharedService:SharedService,
+    private location:Location
+    ) {
 
     this.route.params.subscribe(params => {
       this.quizPackId = params['id'];
+      if(!this.quizPackId){
+        this.router.navigate(['/']);
+      }
+
       this.questionService.getQuestionPackById(this.quizPackId,(pack) => {
           this.listQuesion = pack.questionList as Question[];
           this.currentQuestion = this.listQuesion[this.currentIndex];
           if(this.listQuesion.length == 1){
               this.showNext = false;
           }
-      })
+      },() => {
+          console.log("Error");
+      });
+
     })
 
     
@@ -89,11 +88,13 @@ export class QuizBoardComponent implements OnInit {
     } 
     if(this.currentIndex == 0){
       this.showBack = false;
+      this.showNext = true;
     }
     if(this.currentIndex == this.listQuesion.length - 1){
+      this.showBack = true;
       this.showNext = false;
     }
-    
+  
   }
 
   sliderbarClickEvent(question){
@@ -125,7 +126,15 @@ export class QuizBoardComponent implements OnInit {
   submitQuiz(){
     this.questionService.getResultQuiz(this.quizPackId,this.listQuesion,(result) =>{
         console.log(result);
+        this.sharedService.resultPoint = result;
+        this.sharedService.listQuestion = this.listQuesion;
+        this.router.navigate(["quiz-result"]);
     });
-    
   }
+
+  backClickEvent(){
+    this.router.navigate(['/']);
+  }
+
 }
+

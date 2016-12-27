@@ -1,5 +1,6 @@
 md-radio-button{
-    display: block;
+    display: inline-block;
+    width: 100%;
 }
 
 .md-radio-label{

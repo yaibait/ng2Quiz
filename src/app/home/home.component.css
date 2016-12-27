@@ -1,0 +1,30 @@
+#quiz-board{
+    margin-top: 40px;
+}
+#quiz-board a{
+    text-decoration: none;
+}
+md-card-actions{
+    text-align: center;
+}
+#add_quiz{
+    position: fixed;
+    right: 50px;
+    bottom: 30px;
+    color: #fff;
+}
+md-card-title{
+    overflow: hidden;
+    font-size: 18px;
+}
+md-card-title{
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*md-card{
+    height: 288px;
+}*/
+#quiz-wrap-component .col-md-3{
+    margin-top: 20px;
+}

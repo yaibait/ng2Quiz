@@ -8,13 +8,18 @@ import { QuestionComponent } from './question/question.component';
 import { QuizBoardComponent } from './quiz-board/quiz-board.component';
 import { MaterializeModule } from 'angular2-materialize';
 import { MaterialModule } from '@angular/material';
-import { CreateQuizComponent } from './create-quiz/create-quiz.component';
+import { CreateQuizComponent,CreateDialog } from './create-quiz/create-quiz.component';
 import {CKEditorModule} from 'ng2-ckeditor';
 import { HomeComponent } from './home/home.component';
 
-import { AngularFireModule } from 'angularfire2';
+
+import { AngularFireModule,AuthProviders,AuthMethods } from 'angularfire2';
 import {BusyModule} from 'angular2-busy';
 import { ResultComponent } from './result/result.component';
+import { SharedService } from './shared.service';
+import { LoadingAnimateModule, LoadingAnimateService } from 'ng2-loading-animate';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth.service';
 
 
 export const firebaseConfig = {
@@ -26,12 +31,20 @@ export const firebaseConfig = {
 };
 
 const appRouters:Routes = [
-  {path : 'quiz-create', component:CreateQuizComponent},
-  {path: 'quiz-result', component:ResultComponent},
+  {path : 'quiz-create',canActivate:[AuthService],component:CreateQuizComponent},
+  {
+    path: 'quiz-result',
+    component:ResultComponent},
   {path: 'quiz-board/:id', component:QuizBoardComponent},
+  {path: 'quiz-board', component:HomeComponent},
+  {path: 'login', component:LoginComponent},  
   {path: '',component:HomeComponent}
 ];
 
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +52,9 @@ const appRouters:Routes = [
     QuizBoardComponent,
     CreateQuizComponent,
     HomeComponent,
-    ResultComponent
+    ResultComponent,
+    CreateDialog,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -48,10 +63,18 @@ const appRouters:Routes = [
     MaterialModule.forRoot(),
     CKEditorModule,
     BusyModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    RouterModule.forRoot(appRouters)
+    AngularFireModule.initializeApp(firebaseConfig,myFirebaseAuthConfig),
+    RouterModule.forRoot(appRouters),
+    LoadingAnimateModule.forRoot()
   ],
-  providers: [],
+  entryComponents: [
+    CreateDialog
+  ],
+  providers: [
+    SharedService,
+    LoadingAnimateService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

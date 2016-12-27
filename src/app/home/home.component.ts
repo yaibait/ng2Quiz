@@ -4,6 +4,8 @@ import { Quiz } from '../quiz';
 import { element } from 'protractor';
 import { FirebaseListObservable } from 'angularfire2';
 import {Subscription} from 'rxjs';
+import { LoadingAnimateService } from 'ng2-loading-animate';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,19 +14,22 @@ import {Subscription} from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   homeQuizList;
-  busy:Subscription;
-  constructor(private questionService:QuestionService) { 
+  constructor(private questionService:QuestionService,private _loadingSvc: LoadingAnimateService) { 
       
       
   }
 
   ngOnInit() {
       if(!this.homeQuizList){
-        this.busy = this.questionService.getQuizPackList().subscribe((data) => {
+        this._loadingSvc.setValue(true);
+        this.questionService.getQuizPackList().subscribe((data) => {
+              
               this.homeQuizList = data;
-              this.busy = null;
+              this._loadingSvc.setValue(false);
           },(error) => {
-              this.busy = null;
+            
+              console.log(error);
+             //this._loadingSvc.setValue(false);
           });
         }
   }

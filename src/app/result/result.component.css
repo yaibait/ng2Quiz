@@ -1,0 +1,13 @@
+#wrap-result{
+    margin-top: 40px;
+    text-align: center;
+}
+.point-wrap{
+    width: 200px;
+    height: 200px;
+    /*background-color: #3f51b5;*/
+    color: #3f51b5;
+    line-height: 200px;
+    font-size: 50px;
+    display: inline-block;
+}

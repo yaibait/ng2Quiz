@@ -1,11 +1,21 @@
-<div class="container" [ngBusy]="busy">
-  <div class="row">
+<md-toolbar color="primary">
+      <div class="logo">
+        Quiz App
+      </div>
+      <!--<div class="form-group">
+          <input type="text" placeholder="Search">
+      </div>-->
+      <!--<a routerLink='quiz-create' routerLinkActive='active'>Create</a>-->
+</md-toolbar>
+<div class="container" id="quiz-board">
+  <div class="row" id="quiz-wrap-component">
     <template ngIf="homeQuizList">
-      <div class="col-md-3" *ngFor="let item of homeQuizList">
+      <div class="col-md-3 col-xs-6" *ngFor="let item of homeQuizList">
       <a href="" [routerLink]="['/quiz-board', item.$key]">
       <md-card>
+        <img md-card-image src="assets/images/quiz.jpg">
         <md-card-content>
-              <p>{{ item.title }}</p>
+            <md-card-title>{{ item.title }}</md-card-title>
         </md-card-content>
         <md-card-actions>
               <button md-raised-button color="primary">
@@ -17,4 +27,9 @@
      </div>
     </template>
   </div>
+
+  <button id="add_quiz" md-fab routerLink='quiz-create'>
+    <md-icon class="md-24">add</md-icon>
+  </button>
+
 </div>

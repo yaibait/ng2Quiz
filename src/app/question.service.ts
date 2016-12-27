@@ -10,7 +10,7 @@ export class QuestionService {
   constructor(private af:AngularFire) {
 
    }
-  getQuestionPackById(_id:string,callback:(data) => void){
+  getQuestionPackById(_id:string,callback:(data) => void,error:() => void){
 
       console.log(_id);
       // var tempReturn:Question[] = JSON.parse(JSON.stringify(quesTest2));
@@ -42,6 +42,8 @@ export class QuestionService {
           });
         callback(pack);
 
+      },() => {
+        
       });
   }
   getQuizPackList(){
@@ -80,7 +82,9 @@ export class QuestionService {
           }
 
         });
-        console.log(result);
+        
+        // console.log(result);
+        callback(result);
         });
     
   }

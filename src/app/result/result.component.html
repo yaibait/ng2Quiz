@@ -1,3 +1,21 @@
-<p>
-  result works!
-</p>
+<div class="container">
+  <md-card id="wrap-result" class="center-block">
+    <div class="point-wrap">
+      <p>{{ percent }}%</p>
+    </div>
+
+    <div>
+
+      <button md-raised-button color="primary" (click)="goHomeEvent()">
+        <md-icon class="md-24">home</md-icon>
+      </button>
+
+      <button md-raised-button color="primary" (click)="replayEvent()">
+        <md-icon class="md-24">autorenew</md-icon>
+      </button>
+
+    </div>
+
+
+  </md-card>
+</div>
