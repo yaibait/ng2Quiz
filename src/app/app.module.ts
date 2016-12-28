@@ -6,7 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { QuizBoardComponent } from './quiz-board/quiz-board.component';
-import { MaterializeModule } from 'angular2-materialize';
 import { MaterialModule } from '@angular/material';
 import { CreateQuizComponent,CreateDialog } from './create-quiz/create-quiz.component';
 import {CKEditorModule} from 'ng2-ckeditor';

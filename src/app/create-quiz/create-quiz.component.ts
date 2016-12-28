@@ -130,7 +130,8 @@ export class CreateQuizComponent implements OnInit,AfterViewInit {
     
   }
   backClickEvent(){
-    this.location.back();
+    //this.location.back();
+    this.router.navigate(["/"]);
   }
 }
 
@@ -148,7 +149,7 @@ export class CreateQuizComponent implements OnInit,AfterViewInit {
 export class CreateDialog {
   quizLink:string;
   constructor(public dialogRef: MdDialogRef<CreateDialog>,private sharedService:SharedService,private router:Router) { 
-      this.quizLink = "http://localhost:4200/quiz-board/"+this.sharedService.quizId;
+      this.quizLink = "http://quiz.binhnd.xyz/quiz-board/"+this.sharedService.quizId;
   }
   gotoHome(){
     this.router.navigate(["/"]);
